@@ -1,0 +1,5 @@
+{
+    "java.showBuildStatusOnStart.enabled": true,
+    "eslint.alwaysShowStatus": true,
+    "eslint.autoFixOnSave": true
+}
