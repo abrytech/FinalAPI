@@ -1,5 +1,4 @@
-'use strict'
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const Vendor = sequelize.define('Vendors', {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
@@ -12,7 +11,10 @@ module.exports = (sequelize, DataTypes) => {
     vendorImage: DataTypes.STRING,
     banner: DataTypes.STRING,
     storeName: DataTypes.STRING,
-    storeUrl: DataTypes.STRING
+    storeUrl: DataTypes.STRING,
+    activationKey: DataTypes.STRING,
+    deleted: DataTypes.BOOLEAN,
+    spam: DataTypes.BOOLEAN
   }, {})
   Vendor.associate = function (models) {
     // associations can be defined here

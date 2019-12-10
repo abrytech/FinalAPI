@@ -1,18 +1,19 @@
-'use strict'
-module.exports = {
+export default {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Categories', {
       id: {
-        // allowNull: false,
-        // autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.UUID
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
       },
       name: {
         type: Sequelize.STRING
       },
-      description: {
-        type: Sequelize.STRING(500)
+      parentId: {
+        type: Sequelize.UUID
+      },
+      image: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -21,12 +22,6 @@ module.exports = {
       updatedAt: {
         defaultValue: Sequelize.NOW,
         type: Sequelize.DATE
-      },
-      createdBy: {
-        type: Sequelize.STRING(36)
-      },
-      updatedBy: {
-        type: Sequelize.STRING(36)
       }
     })
   },

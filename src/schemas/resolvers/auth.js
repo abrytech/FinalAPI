@@ -25,6 +25,7 @@ export default {
     },
 
     signIn: async (root, args, { req, res }, info) => {
+      Auth.checkSignedOut(req)
       if (req.userId) {
         const user = await models.Users.findByPk(req.userId)
         return user

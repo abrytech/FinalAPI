@@ -1,4 +1,3 @@
-'use strict'
 import { hashSync, compareSync, genSaltSync } from 'bcryptjs'
 export default (sequelize, DataTypes) => {
   const User = sequelize.define('Users', {
@@ -9,7 +8,10 @@ export default (sequelize, DataTypes) => {
     phoneNo: DataTypes.STRING,
     username: DataTypes.STRING,
     password: DataTypes.STRING,
-    userImage: DataTypes.STRING
+    userImage: DataTypes.STRING,
+    activationKey: DataTypes.STRING,
+    deleted: DataTypes.BOOLEAN,
+    spam: DataTypes.BOOLEAN
   }, {
     hooks: {
       afterValidate: (user, options) => {

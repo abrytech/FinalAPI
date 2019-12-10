@@ -1,6 +1,4 @@
-'use strict'
-// const UUID = require('uuid/v4')
-module.exports = {
+export default {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Users', {
       id: {
@@ -40,6 +38,15 @@ module.exports = {
       },
       userImage: {
         type: Sequelize.STRING
+      },
+      activationKey: {
+        type: Sequelize.STRING
+      },
+      deleted: {
+        type: Sequelize.BOOLEAN
+      },
+      spam: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,

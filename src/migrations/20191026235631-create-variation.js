@@ -1,21 +1,13 @@
-'use strict'
-module.exports = {
+export default {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Variations', {
       id: {
-        // allowNull: false,
-        // autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.UUID
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
       },
       productId: {
-        type: Sequelize.STRING
-      },
-      color: {
-        type: Sequelize.STRING
-      },
-      size: {
-        type: Sequelize.STRING
+        type: Sequelize.UUID
       },
       price: {
         type: Sequelize.DOUBLE
@@ -23,8 +15,20 @@ module.exports = {
       salePrice: {
         type: Sequelize.DOUBLE
       },
-      OutStock: {
-        type: Sequelize.BOOLEAN
+      image: {
+        type: Sequelize.STRING
+      },
+      quantity: {
+        type: Sequelize.INTEGER
+      },
+      inventoryId: {
+        type: Sequelize.UUID
+      },
+      attributeId: {
+        type: Sequelize.UUID
+      },
+      attributeValueId: {
+        type: Sequelize.UUID
       },
       createdAt: {
         allowNull: false,
@@ -32,12 +36,6 @@ module.exports = {
       },
       updatedAt: {
         type: Sequelize.DATE
-      },
-      createdBy: {
-        type: Sequelize.STRING(36)
-      },
-      updatedBy: {
-        type: Sequelize.STRING(36)
       }
     })
   },

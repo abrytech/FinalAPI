@@ -1,12 +1,10 @@
-'use strict'
-module.exports = {
+export default {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('products', {
+    return queryInterface.createTable('Products', {
       id: {
-        allowNull: false,
-        // autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.UUID
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
       },
       name: {
         type: Sequelize.STRING
@@ -14,8 +12,17 @@ module.exports = {
       code: {
         type: Sequelize.STRING
       },
-      tag: {
+      type: {
         type: Sequelize.STRING
+      },
+      newProduct: {
+        type: Sequelize.BOOLEAN
+      },
+      productStatus: {
+        type: Sequelize.STRING
+      },
+      futuredProduct: {
+        type: Sequelize.BOOLEAN
       },
       review: {
         type: Sequelize.STRING
@@ -26,10 +33,10 @@ module.exports = {
       shortDescription: {
         type: Sequelize.STRING
       },
-      brand: {
+      brandId: {
         type: Sequelize.STRING
       },
-      model: {
+      modelId: {
         type: Sequelize.STRING
       },
       image: {

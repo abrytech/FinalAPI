@@ -5,39 +5,40 @@ extend type Query{
     addresses:[Address!]!
 }
 extend type Mutation{
-  addAddress(address: String!,city: String!, state: String!, country:String!, postalCode: String, gridPosition: String, userId: ID!): Address
+  addAddress(address_line_1: String!, address_line_2: String, city: String!, country: String!, stateCounty: String!, map: String, vendorId: ID, userId: ID): Address
   updateAddress(id: ID!, data: AddressInput!): Address 
   deleteAddress(id: ID!): Boolean
-  deleteAddressByWhere(where: WhereInputs!): Boolean
+  deleteAddressByWhere(where: WhereAddresses!): Boolean
 }
 type Address{
     id: ID!,
-    address: String!,
+    address_line_1: String!,
+    address_line_2: String,
     city: String!,
-    state: String!,
     country: String!,
-    postalCode: String,
-    gridPosition: String,
+    stateCounty: String!,
+    map: String,
     userId: User,
-    createdAt: String
+    vendorId: Vendor
 }
-input WhereInputs{
-  address: String!,
+input WhereAddresses{
+  address_line_1: String!,
+  address_line_2: String,
   city: String!,
-  state: String!,
   country: String!,
-  postalCode: String,
-  userId: UserInput,
+  stateCounty: String!,
+  map: String,
   createdAt: String,
   updatedAt: String
 }
 input AddressInput{
-    address: String,
-    city: String,
-    state: String,
-    country: String,
-    postalCode: String,
-    gridPosition: String,
-    userId: ID,
+    address_line_1: String!,
+    address_line_2: String,
+    city: String!,
+    country: String!,
+    stateCounty: String!,
+    map: String,
+    vendorId: ID,
+    userId: ID
 }
 `

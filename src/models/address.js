@@ -6,9 +6,9 @@ export default (sequelize, DataTypes) => {
     country: DataTypes.STRING,
     stateCounty: DataTypes.STRING,
     map: DataTypes.STRING,
-    userId: DataTypes.STRING,
-    vendorId: DataTypes.STRING
-  }, {})
+    userId: DataTypes.UUID,
+    vendorId: DataTypes.UUID
+  }, { })
   Address.associate = function (models) {
     // associations can be defined here
     Address.belongsTo(models.Vendors, { foreignKey: 'vendorId' })

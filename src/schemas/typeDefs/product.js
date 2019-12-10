@@ -2,26 +2,45 @@ import { gql } from 'apollo-server-express'
 export default gql`
 extend type Query{
     product(id: ID!): Product
-    products:[Product!]!
+    products:[Product!]!,
+    whereProducts(where: WhereProducts!):[Product!]!
 }
 extend type Mutation{
-  addProduct( name: String!, price: Float!, description: String!, quantity: Int!, tag: [String]): Product
+  addProduct(name: String, code: String, type: String!, newProduct: Boolean!, productStatus: String!, futuredProduct: Boolean!, description: String, shortDescription: String, brand: ID, model: ID, image: String, gallery: String, enableShare: Boolean, isVariable: Boolean, warranty: Int, categoryId: ID, vendorId: ID): Product
   updateProduct(id: ID!, data: ProductInput!): Product
   deleteProduct(id: ID!): Boolean
-  deleteProductByName(where: WhereInput!): DeleteType
+  deleteProductByName(where: WhereProducts!): DeleteType
 }
 
 input ProductInput{
       name: String,
-      price: Float,
+      code: String,
+      type: String,
+      newProduct: Boolean,
+      productStatus: String,
+      futuredProduct: Boolean,
       description: String,
-      quantity: Int,
-      tag: [String],
+      shortDescription: String,
+      brandId: ID,
+      modelId: ID,
+      image: String,
+      gallery: String,
+      enableShare: Boolean,
+      isVariable: Boolean,
+      warranty: Int,
+      categoryId: ID,
+      vendorId: ID
 }
-input WhereInput{
+input WhereProducts{
       name: String,
-      price: Float,
-      quantity: Int
+      code: String,
+      type: String,
+      newProduct: Boolean,
+      productStatus: String,
+      futuredProduct: Boolean,
+      brandId: ID,
+      categoryId: ID,
+      modelId: ID
 }
 type DeleteType{ 
   deletedCount: Int, 
@@ -30,11 +49,24 @@ type DeleteType{
 }
 type Product{
       id: ID!,
-      name: String!,
-      price: Float!,
-      description: String!,
-      quantity: Int!,
-      tag: [String],
+      name: String,
+      code: String,
+      type: String,
+      newProduct: Boolean,
+      productStatus: String,
+      futuredProduct: Boolean,
+      review: Review,
+      description: String,
+      shortDescription: String,
+      brandId: Brand,
+      modelId: Model,
+      image: String,
+      gallery: String,
+      enableShare: Boolean,
+      isVariable: Boolean,
+      warranty: Int,
+      categoryId: Category,
+      vendorId: Vendor
       createdAt: String,
       updatedAt: String, 
       createdBy: User,

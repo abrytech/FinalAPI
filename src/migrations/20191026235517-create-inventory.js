@@ -1,10 +1,10 @@
-'use strict'
-module.exports = {
+export default {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Inventories', {
       id: {
         primaryKey: true,
-        type: Sequelize.UUID
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
       },
       stockStatus: {
         type: Sequelize.STRING
@@ -17,19 +17,17 @@ module.exports = {
         defaultValue: false,
         type: Sequelize.BOOLEAN
       },
+      productId: {
+        defaultValue: false,
+        type: Sequelize.UUID
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
       },
       updatedAt: {
-        defaultValue: Sequelize.NOW,
-        type: Sequelize.DATE
-      },
-      createdBy: {
-        type: Sequelize.STRING(36)
-      },
-      updatedBy: {
-        type: Sequelize.STRING(36)
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW
       }
     })
   },

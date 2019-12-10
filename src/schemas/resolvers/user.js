@@ -1,6 +1,6 @@
 import models from '../../models'
 import * as Auth from '../../auth'
-import uuidv4 from 'uuid/v4'
+// import uuidv4 from 'uuid/v4'
 import * as Validation from '../../validation/index'
 // import { UserInputError } from 'apollo-server-core'
 
@@ -10,12 +10,16 @@ const registerValidation = Validation.default.registerValidation
 export default {
   Query: {
     user: (root, { id }, { req }, info) => {
-      // checkSignedIn(req)
+      Auth.checkSignedIn(req)
       return models.Users.findByPk(id)
     },
     users: async (root, args, { req }, info) => {
-      // checkSignedIn(req)
+      Auth.checkSignedIn(req)
       return models.Users.findAll()
+    },
+    whereUsers: async (root, args, { req }, info) => {
+      Auth.checkSignedIn(req)
+      return models.Users.findAll(args)
     }
   },
 
@@ -24,7 +28,7 @@ export default {
       // if (await idValidation.validateAsync(args.id)) { throw new UserInputError(`${args.id} is not a valid user ID`) }
       Auth.checkSignedIn(req)
       await registerValidation.validateAsync(args)
-      args.id = uuidv4()
+      // args.id = uuidv4()
       await models.Users.create(args)
     },
 

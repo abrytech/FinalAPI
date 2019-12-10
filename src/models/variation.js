@@ -1,12 +1,13 @@
-'use strict'
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const Variation = sequelize.define('Variations', {
     productId: DataTypes.UUID,
-    color: DataTypes.INTEGER,
-    size: DataTypes.INTEGER,
     price: DataTypes.DOUBLE,
     salePrice: DataTypes.DOUBLE,
-    OutStock: DataTypes.BOOLEAN
+    image: DataTypes.DOUBLE,
+    quantity: DataTypes.INTEGER,
+    inventoryId: DataTypes.UUID,
+    attributeId: DataTypes.UUID,
+    attributeValueId: DataTypes.UUID
   }, {})
   Variation.associate = function (models) {
     // associations can be defined here

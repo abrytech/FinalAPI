@@ -1,12 +1,10 @@
-'use strict'
-module.exports = {
+export default {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Address', {
+    return queryInterface.createTable('Addresses', {
       id: {
-        // allowNull: false,
-        // autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.UUID
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
       },
       address_line_1: {
         allowNull: false,
@@ -43,12 +41,6 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      },
-      createdBy: {
-        type: Sequelize.STRING(36)
-      },
-      updatedBy: {
-        type: Sequelize.STRING(36)
       }
     })
   },

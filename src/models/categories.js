@@ -1,7 +1,8 @@
 export default (sequelize, DataTypes) => {
   const Categories = sequelize.define('Categories', {
     name: DataTypes.STRING,
-    description: DataTypes.STRING(500)
+    parentId: DataTypes.UUID,
+    image: DataTypes.STRING
   }, {})
   Categories.associate = function (models) {
     // associations can be defined here

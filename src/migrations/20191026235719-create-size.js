@@ -1,12 +1,10 @@
-'use strict'
-module.exports = {
+export default {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Sizes', {
       id: {
-        // allowNull: false,
-        // autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.UUID
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
       },
       value: {
         type: Sequelize.STRING
@@ -21,13 +19,13 @@ module.exports = {
       updatedAt: {
         defaultValue: Sequelize.NOW,
         type: Sequelize.DATE
-      },
-      createdBy: {
-        type: Sequelize.STRING(36)
-      },
-      updatedBy: {
-        type: Sequelize.STRING(36)
       }
+      // createdBy: {
+      //   type: Sequelize.STRING(36)
+      // },
+      // updatedBy: {
+      //   type: Sequelize.STRING(36)
+      // }
     })
   },
   down: (queryInterface, Sequelize) => {

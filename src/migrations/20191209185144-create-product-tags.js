@@ -1,34 +1,30 @@
 export default {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Colors', {
+    return queryInterface.createTable('ProductTags', {
       id: {
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4
       },
-      value: {
-        type: Sequelize.STRING
+      productId: {
+        allowNull: false,
+        type: Sequelize.UUID
       },
-      name: {
-        type: Sequelize.STRING
+      tagId: {
+        allowNull: false,
+        type: Sequelize.UUID
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
       },
       updatedAt: {
-        defaultValue: Sequelize.NOW,
+        allowNull: false,
         type: Sequelize.DATE
       }
-      // createdBy: {
-      //   type: Sequelize.STRING(36)
-      // },
-      // updatedBy: {
-      //   type: Sequelize.STRING(36)
-      // }
     })
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Colors')
+    return queryInterface.dropTable('ProductTags')
   }
 }
