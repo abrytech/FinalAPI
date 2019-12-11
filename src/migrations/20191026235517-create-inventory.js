@@ -1,4 +1,5 @@
-export default {
+'use strict'
+module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Inventories', {
       id: {
@@ -11,7 +12,7 @@ export default {
       },
       outOfStock: {
         defaultValue: true,
-        type: Sequelize.BOOLEAN
+        type: Sequelize.B23OOLEAN
       },
       soldIndividually: {
         defaultValue: false,
