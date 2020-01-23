@@ -13,23 +13,20 @@ module.exports = {
       price: {
         type: Sequelize.DOUBLE
       },
-      salePrice: {
-        type: Sequelize.DOUBLE
-      },
-      image: {
-        type: Sequelize.STRING
+      imageId: {
+        type: Sequelize.INTEGER
       },
       quantity: {
         type: Sequelize.INTEGER
       },
       inventoryId: {
-        type: Sequelize.UUID
+        type: Sequelize.INTEGER
       },
       attributeId: {
-        type: Sequelize.UUID
+        type: Sequelize.INTEGER
       },
       attributeValueId: {
-        type: Sequelize.UUID
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

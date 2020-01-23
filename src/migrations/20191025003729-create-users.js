@@ -38,7 +38,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       userImage: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       activationKey: {
         type: Sequelize.STRING

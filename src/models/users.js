@@ -1,4 +1,5 @@
 import { hashSync, compareSync, genSaltSync } from 'bcryptjs'
+import uuid from 'uuid/v4'
 export default (sequelize, DataTypes) => {
   const User = sequelize.define('Users', {
     firstName: DataTypes.STRING,
@@ -8,16 +9,23 @@ export default (sequelize, DataTypes) => {
     phoneNo: DataTypes.STRING,
     username: DataTypes.STRING,
     password: DataTypes.STRING,
-    userImage: DataTypes.STRING,
+    userImage: DataTypes.INTEGER,
     activationKey: DataTypes.STRING,
     deleted: DataTypes.BOOLEAN,
     spam: DataTypes.BOOLEAN
   }, {
     hooks: {
-      afterValidate: (user, options) => {
+      beforeCreate: (user, option) => {
+        user.id = uuid()
         if (user.password) {
           user.password = hashSync(user.password, genSaltSync(8), null)
-          console.log(user.password)
+          console.log(`Users beforeCreate Hook hashedPassword = ${user.password}`)
+        }
+      },
+      beforeUpdate: (user, options) => {
+        if (user.password) {
+          user.password = hashSync(user.password, genSaltSync(8), null)
+          console.log(`Users beforeUpdate Hook hashedPassword = ${user.password}`)
         }
       }
     }

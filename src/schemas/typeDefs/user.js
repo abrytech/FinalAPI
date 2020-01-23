@@ -6,7 +6,7 @@ extend type Query{
     whereUsers(where: UserInput!):[User!]!
 }
 extend type Mutation{
-  addUser(firstName: String!, lastName: String!, displayName: String, email: String!, username: String!, password:String!, gender: String!, phoneNo: String, userImage: String, activationKey: String, deleted: Boolean, spam: Boolean): User
+  addUser(firstName: String!, lastName: String!, displayName: String, email: String!, username: String!, password:String!, gender: String!, phoneNo: String, userImage: ImageFileInput, activationKey: String, deleted: Boolean, spam: Boolean): User
   updateUser(id: ID!, data: UserInput!): User
   deleteUser(id: ID!): Boolean
 }
@@ -20,7 +20,7 @@ input UserInput{
   password:String,
   gender: String,
   phoneNo: String,
-  userImage: String
+  userImage: Int
   activationKey: String,
   deleted: Boolean,
   spam: Boolean
@@ -36,7 +36,7 @@ type User{
   password:String,
   gender: String,
   phoneNo: String,
-  userImage: String,
+  userImage: Int,
   activationKey: String,
   deleted: Boolean,
   spam: Boolean,

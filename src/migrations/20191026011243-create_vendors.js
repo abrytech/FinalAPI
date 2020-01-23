@@ -41,10 +41,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       vendorImage: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       banner: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       storeName: {
         allowNull: false,

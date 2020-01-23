@@ -16,6 +16,9 @@ module.exports = {
       rating: {
         type: Sequelize.DOUBLE
       },
+      parentId: {
+        type: Sequelize.UUID
+      },
       review: {
         type: Sequelize.STRING(500)
       },

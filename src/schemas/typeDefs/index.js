@@ -17,6 +17,8 @@ import shipping from './shipping'
 import tag from './tag'
 import variation from './variation'
 import vendor from './vendor'
+import discount from './discount'
+import image from './image'
 
 export default [
   root,
@@ -37,5 +39,7 @@ export default [
   shipping,
   tag,
   variation,
-  vendor
+  vendor,
+  discount,
+  image
 ]

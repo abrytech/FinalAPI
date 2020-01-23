@@ -2,7 +2,7 @@ import { gql } from 'apollo-server-express'
 export default gql`
 extend type Query{
     inventory(id: ID!): Inventory
-    inventorys:[Inventory!]!
+    inventories:[Inventory!]!
 }
 extend type Mutation{
   addInventory(stockStatus: String, outOfStock: Boolean, soldIndividually:Boolean, productId: ID): Inventory

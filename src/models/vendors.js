@@ -1,3 +1,4 @@
+import uuid from 'uuid/v4'
 export default (sequelize, DataTypes) => {
   const Vendor = sequelize.define('Vendors', {
     firstName: DataTypes.STRING,
@@ -8,14 +9,20 @@ export default (sequelize, DataTypes) => {
     username: DataTypes.STRING,
     password: DataTypes.STRING,
     biographicalInfo: DataTypes.STRING,
-    vendorImage: DataTypes.STRING,
-    banner: DataTypes.STRING,
+    vendorImage: DataTypes.INTEGER,
+    banner: DataTypes.INTEGER,
     storeName: DataTypes.STRING,
     storeUrl: DataTypes.STRING,
     activationKey: DataTypes.STRING,
     deleted: DataTypes.BOOLEAN,
     spam: DataTypes.BOOLEAN
-  }, {})
+  }, {
+    hooks: {
+      beforeCreate: (data, option) => {
+        data.id = uuid()
+      }
+    }
+  })
   Vendor.associate = function (models) {
     // associations can be defined here
     Vendor.hasOne(models.Addresses, {

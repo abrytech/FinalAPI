@@ -1,11 +1,11 @@
 import models from '../../models'
 import * as Auth from '../../auth'
-// import uuidv4 from 'uuid/v4'
 import * as Validation from '../../validation/index'
-// import { UserInputError } from 'apollo-server-core'
+import { UserInputError } from 'apollo-server-core'
+import * as ImageOps from '../../ops/image_ops'
 
 const registerValidation = Validation.default.registerValidation
-// const idValidation = Validation.default.idValidation
+const isIDValid = Validation.default.idValidation
 
 export default {
   Query: {
@@ -25,15 +25,19 @@ export default {
 
   Mutation: {
     addUser: async (root, args, { req }, info) => {
-      // if (await idValidation.validateAsync(args.id)) { throw new UserInputError(`${args.id} is not a valid user ID`) }
-      Auth.checkSignedIn(req)
+      if (await isIDValid.validateAsync(args.id)) { throw new UserInputError(`${args.id} is not a valid user ID`) }
+      // Auth.checkSignedIn(req)
+      if (args.image) {
+        const image = await ImageOps.addPhoto(args.image)
+        args.imageId = image.id
+      }
       await registerValidation.validateAsync(args)
-      // args.id = uuidv4()
-      await models.Users.create(args)
+      const user = await models.Users.create(args)
+      return user
     },
 
     updateUser: async (root, args, { req }, info) => {
-      // if (await idValidation.validateAsync(args.id)) { throw new UserInputError(`${args.id} is not a valid user ID`) }
+      if (await isIDValid.validateAsync(args.id)) { throw new UserInputError(`${args.id} is not a valid user ID`) }
       Auth.checkSignedIn(req)
       try {
         const newUser = await models.Users.update(args.data, { where: { id: args.id } })
@@ -44,7 +48,7 @@ export default {
     },
 
     deleteUser: async (root, args, { req }, info) => {
-      // if (await idValidation.validateAsync(args.id)) { throw new UserInputError(`${args.id} is not a valid user ID`) }
+      if (await isIDValid.validateAsync(args.id)) { throw new UserInputError(`${args.id} is not a valid user ID`) }
       Auth.checkSignedIn(req)
       const { deletedCount } = await models.Users.deleteOne({ id: args.id })
       return deletedCount !== 0

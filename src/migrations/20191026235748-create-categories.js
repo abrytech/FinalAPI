@@ -13,8 +13,8 @@ module.exports = {
       parentId: {
         type: Sequelize.UUID
       },
-      image: {
-        type: Sequelize.STRING
+      imageId: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

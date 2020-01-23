@@ -1,7 +1,7 @@
 export default (sequelize, DataTypes) => {
   const Models = sequelize.define('Models', {
     name: DataTypes.STRING,
-    brandId: DataTypes.UUID
+    brandId: DataTypes.INTEGER
   }, {})
   Models.associate = function (models) {
     // associations can be defined here

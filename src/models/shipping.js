@@ -6,7 +6,7 @@ export default (sequelize, DataTypes) => {
     height: DataTypes.DOUBLE,
     class: DataTypes.STRING,
     productId: DataTypes.UUID
-  }, { })
+  }, {})
   Shipping.associate = function (models) {
     // associations can be defined here
     Shipping.belongsTo(models.Products)

@@ -4,7 +4,7 @@ export default (sequelize, DataTypes) => {
     outOfStock: DataTypes.BOOLEAN,
     soldIndividually: DataTypes.BOOLEAN,
     productId: DataTypes.UUID
-  }, { })
+  }, {})
   Inventory.associate = function (models) {
     // associations can be defined here
     Inventory.belongsTo(models.Products)

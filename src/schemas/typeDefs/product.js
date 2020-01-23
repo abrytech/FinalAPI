@@ -6,10 +6,10 @@ extend type Query{
     whereProducts(where: WhereProducts!):[Product!]!
 }
 extend type Mutation{
-  addProduct(name: String, code: String, type: String!, newProduct: Boolean!, productStatus: String!, futuredProduct: Boolean!, description: String, shortDescription: String, brand: ID, model: ID, image: String, gallery: String, enableShare: Boolean, isVariable: Boolean, warranty: Int, categoryId: ID, vendorId: ID): Product
+  addProduct(name: String, code: String, type: String!, newProduct: Boolean!, productStatus: String!, futuredProduct: Boolean!, description: String, shortDescription: String, dicountId: Int, brand: ID, model: ID, image: ImageFileInput, gallery: String, enableShare: Boolean, isVariable: Boolean, warranty: Int, categoryId: ID, vendorId: ID): Product
   updateProduct(id: ID!, data: ProductInput!): Product
   deleteProduct(id: ID!): Boolean
-  deleteProductByName(where: WhereProducts!): DeleteType
+  deleteProductByWhere(where: WhereProducts!): Boolean
 }
 
 input ProductInput{
@@ -21,10 +21,11 @@ input ProductInput{
       futuredProduct: Boolean,
       description: String,
       shortDescription: String,
+      dicountId: Int,
       brandId: ID,
       modelId: ID,
-      image: String,
-      gallery: String,
+      imageId: Int,
+      # gallery: String,
       enableShare: Boolean,
       isVariable: Boolean,
       warranty: Int,
@@ -38,15 +39,16 @@ input WhereProducts{
       newProduct: Boolean,
       productStatus: String,
       futuredProduct: Boolean,
+      dicountId: Int,
       brandId: ID,
       categoryId: ID,
       modelId: ID
 }
-type DeleteType{ 
-  deletedCount: Int, 
-  ok: Int, 
-  n: Int
-}
+# type DeleteType{ 
+#   deletedCount: Int, 
+#   ok: Int, 
+#   n: Int
+# }
 type Product{
       id: ID!,
       name: String,
@@ -58,10 +60,11 @@ type Product{
       review: Review,
       description: String,
       shortDescription: String,
+      dicountId: Discount,
       brandId: Brand,
       modelId: Model,
-      image: String,
-      gallery: String,
+      imageId: Int,
+      # gallery: String,
       enableShare: Boolean,
       isVariable: Boolean,
       warranty: Int,

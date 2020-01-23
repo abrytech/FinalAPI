@@ -3,16 +3,17 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Inventories', {
       id: {
+        allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4
+        type: Sequelize.INTEGER
       },
       stockStatus: {
         type: Sequelize.STRING
       },
       outOfStock: {
         defaultValue: true,
-        type: Sequelize.B23OOLEAN
+        type: Sequelize.BOOLEAN
       },
       soldIndividually: {
         defaultValue: false,

@@ -3,11 +3,15 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('AttributeValues', {
       id: {
+        allowNull: false,
         primaryKey: true,
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4
+        autoIncrement: true,
+        type: Sequelize.INTEGER
       },
       attributeId: {
+        type: Sequelize.INTEGER
+      },
+      variationId: {
         type: Sequelize.UUID
       },
       value: {

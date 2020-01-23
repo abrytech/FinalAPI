@@ -3,9 +3,10 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('ProductTags', {
       id: {
+        allowNull: false,
         primaryKey: true,
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4
+        autoIncrement: true,
+        type: Sequelize.INTEGER
       },
       productId: {
         allowNull: false,
@@ -13,7 +14,7 @@ module.exports = {
       },
       tagId: {
         allowNull: false,
-        type: Sequelize.UUID
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

@@ -1,3 +1,4 @@
+import uuid from 'uuid/v4'
 export default (sequelize, DataTypes) => {
   const Products = sequelize.define('Products', {
     name: DataTypes.STRING,
@@ -6,21 +7,25 @@ export default (sequelize, DataTypes) => {
     newProduct: DataTypes.BOOLEAN,
     productStatus: DataTypes.STRING,
     futuredProduct: DataTypes.BOOLEAN,
-    description: DataTypes.STRING(400),
-    shortDescription: DataTypes.STRING(150),
-    brandId: DataTypes.UUID,
-    modelId: DataTypes.UUID,
-    image: DataTypes.STRING,
-    gallery: DataTypes.STRING(500),
+    description: DataTypes.STRING(500),
+    shortDescription: DataTypes.STRING,
+    discountId: DataTypes.INTEGER,
+    brandId: DataTypes.INTEGER,
+    modelId: DataTypes.INTEGER,
+    imageId: DataTypes.INTEGER,
+    // gallery: DataTypes.STRING(500),
     enableShare: DataTypes.BOOLEAN,
     isVariable: DataTypes.BOOLEAN,
     warranty: DataTypes.INTEGER,
     categoryId: DataTypes.UUID,
     vendorId: DataTypes.UUID
-    // inventoryId: DataTypes.UUID,
-    // shippingId: DataTypes.UUID,
-    // variationId: DataTypes.UUID,
-  }, { })
+  }, {
+    hooks: {
+      beforeCreate: (data, option) => {
+        data.id = uuid()
+      }
+    }
+  })
   Products.associate = function (models) {
     // associations can be defined here
     Products.hasMany(models.Variations)

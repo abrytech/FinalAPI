@@ -6,7 +6,7 @@ extend type Query{
     whereVariations(where: WhereVariations!):[Variation!]!
 }
 extend type Mutation{
-  addVariation(productId: ID, price: Float, salePrice: Float, image: Float, quantity: Int, inventoryId: ID, attributeId: ID, attributeValueId: ID): Variation
+  addVariation(productId: ID, price: Float, image: ImageFileInput, quantity: Int, inventoryId: ID, attributeId: ID, attributeValueId: ID): Variation
   updateVariation(id: ID!, data: VariationInput!): Variation 
   deleteVariation(id: ID!): Boolean
   deleteVariationByWhere(where: WhereVariations!): Boolean
@@ -15,8 +15,8 @@ type Variation{
   id: ID,
   productId: Product,
   price: Float,
-  salePrice: Float,
-  image: Float,
+  # salePrice: Float,
+  imageId: Int,
   quantity: Int,
   inventoryId: Inventory,
   attributeId: Attribute,
@@ -25,15 +25,15 @@ type Variation{
 input WhereVariations{
   productId: ID,
   price: Float,
-  salePrice: Float,
-  image: Float,
+  # salePrice: Float,
+  imageId: Int,
   quantity: Int
 }
 input VariationInput{
   productId: ID,
   price: Float,
-  salePrice: Float,
-  image: Float,
+  # salePrice: Float,
+  imageId: Int,
   quantity: Int,
   inventoryId: ID,
   attributeId: ID,

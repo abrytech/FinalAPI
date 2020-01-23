@@ -1,43 +1,59 @@
+import models from '../../models'
+import * as Auth from '../../auth'
+import * as ImageOps from '../../ops/image_ops'
+import * as Validation from '../../validation/index'
+import { UserInputError } from 'apollo-server-core'
+const isIDValid = Validation.default.isIDValid
+
 export default {
   Query: {
     product: async (root, { id }, context, info) => {
-      // const product = await productModel.findById(id).populate('createdBy').populate('updatedBy')
-      // return product
+      const product = await models.Products.findByPk(id)
+      return product
     },
     products: async (root, args, context, info) => {
-      // const products = await productModel.find({}).populate('createdBy').populate('updatedBy')
-      // return products
+      const products = await models.Products.findAll()
+      return products
     }
   },
 
   Mutation: {
     addProduct: async (root, args, { req }, info) => {
-      // await Auth.checkSignedIn(req)
-      // args.createdBy = args.updatedBy = req.session.userId
-      // await Validation.default.productValidation.validateAsync(args)
-      // const product = await productModel.create(args)
-      // return product
+      if (await isIDValid.validateAsync(args.id)) { throw new UserInputError(`${args.id} is not a valid product ID`) }
+      Auth.checkSignedIn(req)
+      if (args.image) {
+        const image = await ImageOps.addPhoto(args.image)
+        args.imageId = image.id
+      }
+      await models.Products.create(args)
     },
+
     updateProduct: async (root, args, { req }, info) => {
-      // if (!mongoose.Types.ObjectId.isValid(args.id)) { throw new UserInputError(`${args.id} is not a valid Product ID`) }
-      // await Auth.checkSignedIn(req)
-      // await joi.validate(args.data, Validation.default.productValidation)
-      // await productModel.findByIdAndUpdate(args.id, args.data, { new: true })
+      if (await isIDValid.validateAsync(args.id)) { throw new UserInputError(`${args.id} is not a valid product ID`) }
+      Auth.checkSignedIn(req)
+      try {
+        const newProduct = await models.Products.update(args.data, { where: { id: args.id } })
+        return newProduct
+      } catch (error) {
+        throw new Error(error)
+      }
     },
+
     deleteProduct: async (root, args, { req }, info) => {
-      // if (!mongoose.Types.ObjectId.isValid(args.id)) {
-      //   throw new UserInputError(`${args.id} is not a valid product ID`)
-      // }
-      // await Auth.checkSignedIn(req)
-      // const { deletedCount } = await productModel.deleteOne({ _id: args.id })
-      // return deletedCount !== 0
+      if (await isIDValid.validateAsync(args.id)) { throw new UserInputError(`${args.id} is not a valid product ID`) }
+      Auth.checkSignedIn(req)
+      const { deletedCount } = await models.Products.destroy({ where: { id: args.id } })
+      return deletedCount !== 0
     },
-    deleteProductByName: async (root, args, { req }, info) => {
-      // console.log(args)
-      // await Auth.checkSignedIn(req)
-      // if (!args.where.name) throw new UserInputError('Invalid Name input')
-      // const result = await productModel.deleteMany(args.where)
-      // return result
+    deleteProductByWhere: async (root, args, { req }, info) => {
+      if (args) { throw new UserInputError('Invalid UserInput') }
+      Auth.checkSignedIn(req)
+      try {
+        const { deletedCount } = await models.Products.destroy({ where: args })
+        return deletedCount !== 0
+      } catch (error) {
+        throw new Error(error)
+      }
     }
   }
 }

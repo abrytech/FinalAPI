@@ -35,17 +35,20 @@ module.exports = {
         type: Sequelize.STRING
       },
       brandId: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
+      },
+      discountId: {
+        type: Sequelize.INTEGER
       },
       modelId: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
-      image: {
-        type: Sequelize.STRING
+      imageId: {
+        type: Sequelize.INTEGER
       },
-      gallery: {
-        type: Sequelize.STRING(500)
-      },
+      // gallery: {
+      //   type: Sequelize.STRING(500)
+      // },
       enableShare: {
         type: Sequelize.BOOLEAN
       },
@@ -54,6 +57,12 @@ module.exports = {
       },
       warranty: {
         type: Sequelize.INTEGER
+      },
+      vendorId: {
+        type: Sequelize.UUID
+      },
+      categoryId: {
+        type: Sequelize.UUID
       },
       createdAt: {
         allowNull: false,
@@ -64,10 +73,10 @@ module.exports = {
         type: Sequelize.DATE
       },
       createdBy: {
-        type: Sequelize.STRING(36)
+        type: Sequelize.UUID
       },
       updatedBy: {
-        type: Sequelize.STRING(36)
+        type: Sequelize.UUID
       }
     })
   },

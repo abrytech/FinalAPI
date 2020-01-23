@@ -8,7 +8,7 @@ export default (sequelize, DataTypes) => {
     map: DataTypes.STRING,
     userId: DataTypes.UUID,
     vendorId: DataTypes.UUID
-  }, { })
+  }, {})
   Address.associate = function (models) {
     // associations can be defined here
     Address.belongsTo(models.Vendors, { foreignKey: 'vendorId' })
